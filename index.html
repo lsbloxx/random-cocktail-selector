@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random-Cocktail-Selector</title>
+
+    <!-- download: https://github.com/twbs/bootstrap/releases/download/v3.3.6/bootstrap-3.3.6-dist.zip -->
+    <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- download: http://code.jquery.com/jquery-2.2.0.min.js -->
+    <script src="jquery-2.2.0.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- include dictionary of cocktails -->
+    <script src="cocktails.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <style media="screen">
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        #cocktail_table {
+            margin-bottom: 30px;
+        }
+
+        #cocktail_table tr td:first-child {
+            width: 5%;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var $alert_no_alc;
+        var $table;
+        var $table_title;
+        var $table_ingredients;
+        var $table_price_small;
+        var $table_price_normal;
+        var $table_price_jumbo;
+
+
+        // edit content of table
+        function edit_table_elements($element, property)
+        {
+            if (property != null)
+            {
+                $element.text(property);
+                $element.parent().show();
+            }
+            else
+            {
+                $element.parent().hide();
+            }
+        }
+
+        // get a random cocktail from the dictionary
+        function get_random_cocktail(debug_index) {
+            // preset index for debugging!
+            var idx = debug_index;
+
+            // get random cocktail if not specified
+            if (debug_index == null)
+            {
+                var idx = Math.floor(dict.length * Math.random());
+            }
+
+            // show or hide no-alc-alert
+            if (dict[idx].no_alc != null && dict[idx].no_alc == true)
+            {
+                $alert_no_alc.show();
+            }
+            else
+            {
+                $alert_no_alc.hide();
+            }
+
+            // edit table elements
+            edit_table_elements($table_title, dict[idx].title);
+            edit_table_elements($table_ingredients, dict[idx].ingredients);
+            edit_table_elements($table_price_small, dict[idx].price_small);
+            edit_table_elements($table_price_normal, dict[idx].price_normal);
+            edit_table_elements($table_price_jumbo, dict[idx].price_jumbo);
+        }
+
+
+        $(document).ready(function() {
+            // set button event
+            $('#btn_generate').click(function() {
+                // pass index for debugging
+                // get_random_cocktail(0);
+
+                get_random_cocktail();
+            });
+
+            // set global variables
+            $alert_no_alc = $('#alert_no_alc');
+            $table = $('#cocktail_table');
+            $table_title = $table.find('#cocktail_title');
+            $table_ingredients = $table.find('#cocktail_ingredients');
+            $table_price_small = $table.find('#cocktail_price_small');
+            $table_price_normal = $table.find('#cocktail_price_normal');
+            $table_price_jumbo = $table.find('#cocktail_price_jumbo');
+
+            // get cocktail on page load
+            get_random_cocktail();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <h1>Random-Cocktail-Selector</h1>
+
+            <table class="table" id="cocktail_table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th id="cocktail_title"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ingredients:</td>
+                        <td id="cocktail_ingredients"></td>
+                    </tr>
+                    <tr>
+                        <td>Price&nbsp;(small):</td>
+                        <td id="cocktail_price_small"></td>
+                    </tr>
+                    <tr>
+                        <td>Price&nbsp;(normal):</td>
+                        <td id="cocktail_price_normal"></td>
+                    </tr>
+                    <tr>
+                        <td>Price&nbsp;(jumbo):</td>
+                        <td id="cocktail_price_jumbo"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-danger" role="alert" id="alert_no_alc" style="display: none">
+                <strong>Warning!</strong>
+                This Cocktail contains no alcohol.
+            </div>
+
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="btn_generate">
+                <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+                &nbsp;Just one more!
+            </button>
+        </div>
+    </div>
+</body>
+</html>
