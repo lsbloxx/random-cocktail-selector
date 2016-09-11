@@ -6,7 +6,7 @@ Hello and thank you for using this piece of software.
    - Bootstrap 3.3.6
    - jQuery 2.2.0
 
-2. create a copy of 'cocktails.js' and adjust the new file as needed.
+2. create a copy of 'drinks_example.json' and adjust the new file as needed.
    Don't forget to adjust the filename in 'index.html'.
 
 3. The answer to life’s problems aren’t at the bottom of a beer bottle, they’re on TV.”
@@ -17,7 +17,7 @@ Hello and thank you for using this piece of software.
 
 
 Written by:
-  cocktails.js                  lsbloxx
+  drinks_example.json           lsbloxx
   index.html                    lsbloxx
   install_dependencies.sh       lsbloxx
   README                        lsbloxx
