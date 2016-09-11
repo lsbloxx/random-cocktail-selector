@@ -63,11 +63,9 @@
 
 
         $(document).ready(function() {
-            // get new random drink on button click
-            $('#btn_get_new_drink').click(function() {
-                show_random_drink();
-            });
-
+            var $btn_new_drink    = $('#btn_get_new_drink');
+            var $alert_no_entries = $('#alert_no_entries');
+            
             // initialize global variables
             $table               = $('#drink_table');
             $table_title         = $('#drink_title',        $table);
@@ -77,8 +75,19 @@
             $table_price_jumbo   = $('#drink_price_jumbo',  $table);
             $alert_non_alcoholic = $('#alert_non_alcoholic');
 
+            // get new random drink on button click
+            $btn_new_drink.click(function() {
+                show_random_drink();
+            });
+
             // shows random drink on page load
-            show_random_drink();
+            if (typeof dict === "undefined" || dict.length === 0) {
+                $table.hide();
+                $btn_new_drink.hide();
+                $alert_no_entries.show();
+            } else {
+                show_random_drink();
+            }
         });
     </script>
 </head>
@@ -114,15 +123,19 @@
                 </tbody>
             </table>
 
-            <div class="alert alert-danger" role="alert" id="alert_non_alcoholic" style="display: none">
-                <strong>Warning!</strong>
-                This drink contains no alcohol.
+            <div class="alert alert-warning" role="alert" id="alert_non_alcoholic" style="display: none;">
+                <strong>Warning!</strong> This drink contains no alcohol.
             </div>
 
             <button type="button" class="btn btn-primary btn-lg btn-block" id="btn_get_new_drink">
                 <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
                 &nbsp;Just one more!
             </button>
+            
+            
+            <div class="alert alert-danger" role="alert" id="alert_no_entries" style="display: none;">
+                <strong>Error!</strong> No drinks found! <span style="white-space: nowrap;">(╯°□°）╯︵ ┻━┻</span>
+            </div>
         </div>
     </div>
 </body>
