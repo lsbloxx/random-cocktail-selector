@@ -1,4 +1,4 @@
-var dict = [
+var drinks = [
     {
         "title" : "Sex on the beach",
         "ingredients" : "vodka, peachtree, grenadine, lemon, orange, pineapple, maracuya",

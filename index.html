@@ -9,7 +9,7 @@
     
     <script src="assets/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
 
-    <!-- include dictionary of drinks -->
+    <!-- include array of drinks -->
     <script src="drinks_example.json" type="text/javascript" charset="utf-8"></script>
 
 
@@ -41,24 +41,24 @@
             }
         }
 
-        // get a random drink from the dictionary
+        // get a random drink
         function show_random_drink() {
             // preset index for debugging!
-            var idx = Math.floor(dict.length * Math.random());
+            var idx = Math.floor(drinks.length * Math.random());
 
             // show or hide no-alc-alert
-            if (dict[idx].non_alcoholic != null && dict[idx].non_alcoholic == true) {
+            if (drinks[idx].non_alcoholic != null && drinks[idx].non_alcoholic == true) {
                 $alert_non_alcoholic.show();
             } else {
                 $alert_non_alcoholic.hide();
             }
 
             // edit table elements
-            edit_table_elements($table_title,        dict[idx].title);
-            edit_table_elements($table_ingredients,  dict[idx].ingredients);
-            edit_table_elements($table_price_small,  dict[idx].price_small);
-            edit_table_elements($table_price_normal, dict[idx].price_normal);
-            edit_table_elements($table_price_jumbo,  dict[idx].price_jumbo);
+            edit_table_elements($table_title,        drinks[idx].title);
+            edit_table_elements($table_ingredients,  drinks[idx].ingredients);
+            edit_table_elements($table_price_small,  drinks[idx].price_small);
+            edit_table_elements($table_price_normal, drinks[idx].price_normal);
+            edit_table_elements($table_price_jumbo,  drinks[idx].price_jumbo);
         }
 
 
@@ -81,7 +81,7 @@
             });
 
             // shows random drink on page load
-            if (typeof dict === "undefined" || dict.length === 0) {
+            if (typeof drinks === "undefined" || drinks.length === 0) {
                 $table.hide();
                 $btn_new_drink.hide();
                 $alert_no_entries.show();
