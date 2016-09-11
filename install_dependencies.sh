@@ -1,26 +1,20 @@
 #!/bin/bash
 
-# download dependencies
-if [[ ! -e "bootstrap-3.3.6-dist.zip" ]];
-then
-    wget https://github.com/twbs/bootstrap/releases/download/v3.3.6/bootstrap-3.3.6-dist.zip
-fi
 
-if [[ ! -e "jquery-2.2.0.min.js" ]];
-then
-    wget http://code.jquery.com/jquery-2.2.0.min.js
-fi
+# set framework URLs
+filename_jquery="jquery-3.1.0.min.js"
+filename_bootstrap="v4.0.0-alpha.4.zip"
+dirname_bootstrap="bootstrap-4.0.0-alpha.4"
+url_jquery="https://code.jquery.com/${filename_jquery}"
+url_bootstrap="https://github.com/twbs/bootstrap/archive/${filename_bootstrap}"
 
 
-# unpack bootstrap
-if [[ ! -d "bootstrap-3.3.6-dist" ]];
-then
-    unzip bootstrap-3.3.6-dist.zip
-fi
+# create new directory for frameworks
+mkdir -p "assets"
+cd ./assets/
 
 
-# remove bootstrap zip file
-rm -f bootstrap-3.3.6-dist.zip
+# download framework if needed
+[[ ! -e ${filename_jquery}   ]] && curl    -O "${url_jquery}"
+[[ ! -d ${dirname_bootstrap} ]] && curl -L -O "${url_bootstrap}" && unzip "${filename_bootstrap}" && rm "${filename_bootstrap}"
 
-
-printf "that should do it!\n"
