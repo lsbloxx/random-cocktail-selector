@@ -11,7 +11,7 @@ url_bootstrap="https://github.com/twbs/bootstrap/archive/${filename_bootstrap}"
 
 # create new directory for frameworks
 mkdir -p "assets"
-cd ./assets/
+cd ./assets/ || exit 1
 
 
 # download framework if needed
